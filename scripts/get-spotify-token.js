@@ -10,15 +10,15 @@
 const http = require('http')
 const { exec } = require('child_process')
 
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || process.argv[2]
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || process.argv[3]
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
-  console.error('Error: set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET before running.')
+  console.error('Usage: node scripts/get-spotify-token.js YOUR_CLIENT_ID YOUR_CLIENT_SECRET')
   process.exit(1)
 }
 
-const REDIRECT_URI = 'http://localhost:8888/callback'
+const REDIRECT_URI = 'http://127.0.0.1:8888/callback'
 const SCOPE = 'user-read-currently-playing user-read-playback-state'
 
 const authUrl =

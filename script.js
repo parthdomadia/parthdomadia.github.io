@@ -58,7 +58,7 @@ fetchLocationAndWeather()
 // ── Spotify now-playing ──
 // After deploying to Vercel, replace null with your function URL, e.g.:
 // 'https://your-project.vercel.app/api/spotify'
-const SPOTIFY_ENDPOINT = null
+const SPOTIFY_ENDPOINT = 'https://www.parthdomadia.xyz/api/spotify'
 
 async function fetchSpotify() {
   const el = document.getElementById('status-spotify')
