@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/spotify.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
+}

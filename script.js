@@ -55,10 +55,9 @@ async function fetchLocationAndWeather() {
 
 fetchLocationAndWeather()
 
-// ── Spotify now-playing (requires serverless proxy — placeholder) ──
-// To enable: deploy a serverless function that exchanges your Spotify
-// refresh token for an access token and returns the currently playing track.
-// Point SPOTIFY_ENDPOINT below to that function's URL.
+// ── Spotify now-playing ──
+// After deploying to Vercel, replace null with your function URL, e.g.:
+// 'https://your-project.vercel.app/api/spotify'
 const SPOTIFY_ENDPOINT = null
 
 async function fetchSpotify() {
