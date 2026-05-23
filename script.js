@@ -131,6 +131,29 @@ function initAsciiArt() {
     }
 
     render()
+
+    // Collect mid-tone cells eligible for drift (tiers 2–9)
+    const animatable = []
+    for (let y = 0; y < ASCII_ROWS; y++) {
+      for (let x = 0; x < ASCII_COLS; x++) {
+        const t = grid[y][x].baseTier
+        if (t >= 2 && t <= 9) animatable.push(grid[y][x])
+      }
+    }
+
+    setInterval(() => {
+      // Drift 8 random mid-tone cells by ±1 tier
+      for (let i = 0; i < 8; i++) {
+        const cell = animatable[Math.floor(Math.random() * animatable.length)]
+        cell.offset = Math.random() < 0.5 ? 1 : -1
+      }
+      // Reset one random cell with 30% probability
+      if (Math.random() < 0.3) {
+        const cell = animatable[Math.floor(Math.random() * animatable.length)]
+        cell.offset = 0
+      }
+      render()
+    }, 150)
   }
   img.onerror = () => {
     console.warn('initAsciiArt: failed to load assets/parth.jpg')
