@@ -142,6 +142,8 @@ function initAsciiArt() {
     }
 
     setInterval(() => {
+      if (!animatable.length) return
+      if (document.visibilityState !== 'visible') return
       // Drift 8 random mid-tone cells by ±1 tier
       for (let i = 0; i < 8; i++) {
         const cell = animatable[Math.floor(Math.random() * animatable.length)]
