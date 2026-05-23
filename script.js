@@ -132,6 +132,9 @@ function initAsciiArt() {
 
     render()
   }
+  img.onerror = () => {
+    console.warn('initAsciiArt: failed to load assets/parth.jpg')
+  }
   img.src = 'assets/parth.jpg'
 }
 
