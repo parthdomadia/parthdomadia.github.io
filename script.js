@@ -84,3 +84,55 @@ async function fetchSpotify() {
 
 fetchSpotify()
 setInterval(fetchSpotify, 30_000)
+
+// ── ASCII Art Portrait ──
+const ASCII_RAMP = ' .:,;+*?%S#@'
+const ASCII_COLS = 70
+const ASCII_ROWS = 85
+
+function initAsciiArt() {
+  const pre = document.getElementById('ascii-art')
+  if (!pre) return
+
+  const canvas = document.createElement('canvas')
+  canvas.width  = ASCII_COLS
+  canvas.height = ASCII_ROWS
+  const ctx = canvas.getContext('2d')
+
+  const img = new Image()
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, ASCII_COLS, ASCII_ROWS)
+    const { data } = ctx.getImageData(0, 0, ASCII_COLS, ASCII_ROWS)
+
+    // Build 2D grid of { baseTier, offset }
+    const grid = []
+    for (let y = 0; y < ASCII_ROWS; y++) {
+      grid[y] = []
+      for (let x = 0; x < ASCII_COLS; x++) {
+        const i = (y * ASCII_COLS + x) * 4
+        const brightness = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]
+        const baseTier = Math.round((brightness / 255) * (ASCII_RAMP.length - 1))
+        grid[y][x] = { baseTier, offset: 0 }
+      }
+    }
+
+    // Render grid to pre.textContent
+    function render() {
+      let str = ''
+      for (let y = 0; y < ASCII_ROWS; y++) {
+        for (let x = 0; x < ASCII_COLS; x++) {
+          const { baseTier, offset } = grid[y][x]
+          const tier = Math.max(0, Math.min(ASCII_RAMP.length - 1, baseTier + offset))
+          str += ASCII_RAMP[tier]
+        }
+        str += '\n'
+      }
+      pre.textContent = str
+    }
+
+    render()
+  }
+  img.src = 'assets/parth.jpg'
+}
+
+initAsciiArt()
