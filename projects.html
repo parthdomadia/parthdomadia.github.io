@@ -17,6 +17,18 @@
 
   <a href="/" class="site-logo">pd</a>
 
+  <!-- Fixed image preview in the right grid space -->
+  <div class="project-preview" id="project-preview" aria-hidden="true">
+    <img src="" alt="" class="project-preview__img project-preview__img--a active" id="preview-img-a" />
+    <img src="" alt="" class="project-preview__img project-preview__img--b" id="preview-img-b" />
+  </div>
+
+  <!-- SVG callout lines -->
+  <svg class="callout-svg" id="callout-svg" aria-hidden="true">
+    <line class="callout-line" id="callout-line-top" />
+    <line class="callout-line" id="callout-line-bottom" />
+  </svg>
+
   <main class="page">
     <div class="page__content">
 
@@ -27,7 +39,8 @@
 
       <ol class="project-list">
 
-        <li class="project-item">
+        <!-- data-image is optional — remove it if no image for this project -->
+        <li class="project-item" data-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='32' font-family='monospace'%3EProject 01%3C/text%3E%3C/svg%3E">
           <div class="project-item__top">
             <span class="project-item__num">01</span>
             <div class="project-item__links">
@@ -47,7 +60,7 @@
           </ul>
         </li>
 
-        <li class="project-item">
+        <li class="project-item" data-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%232980b9'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='32' font-family='monospace'%3EProject 02%3C/text%3E%3C/svg%3E">
           <div class="project-item__top">
             <span class="project-item__num">02</span>
             <div class="project-item__links">
@@ -67,6 +80,7 @@
           </ul>
         </li>
 
+        <!-- No image on this one — preview won't appear -->
         <li class="project-item">
           <div class="project-item__top">
             <span class="project-item__num">03</span>
@@ -87,7 +101,7 @@
           </ul>
         </li>
 
-        <li class="project-item">
+        <li class="project-item" data-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%2327ae60'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='32' font-family='monospace'%3EProject 04%3C/text%3E%3C/svg%3E">
           <div class="project-item__top">
             <span class="project-item__num">04</span>
             <div class="project-item__links">
@@ -112,6 +126,7 @@
   </main>
 
   <script src="script.js"></script>
+  <script src="projects.js"></script>
 </body>
 
 </html>

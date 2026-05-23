@@ -1,0 +1,84 @@
+/* ── Problem list ── */
+.problem-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Problem item ── */
+.problem-item {
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.problem-item:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Header row: number + domain ── */
+.problem-item__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.problem-item__num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  opacity: 0.4;
+}
+
+.problem-item__domain {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.2rem 0.55rem;
+  opacity: 0.8;
+}
+
+/* ── Title ── */
+.problem-item__title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 1.75rem;
+}
+
+/* ── Content blocks ── */
+.problem-item__block {
+  margin-bottom: 1.25rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.problem-item__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  opacity: 0.5;
+  margin-bottom: 0.4rem;
+}
+
+.problem-item__text {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+/* ── Tags (reuse from projects.css) ── */
+.problem-item .project-item__tags {
+  margin-top: 1.5rem;
+}

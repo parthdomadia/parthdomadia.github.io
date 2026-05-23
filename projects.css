@@ -7,7 +7,7 @@
 }
 
 .page__content {
-  margin-left: clamp(2rem, 32vw, 520px);
+  margin-left: clamp(2rem, 16vw, 240px);
   max-width: 580px;
   padding: 6rem 2rem 6rem 0;
   width: 100%;
@@ -141,11 +141,91 @@
   opacity: 0.7;
 }
 
+/* ── SVG callout lines ── */
+.callout-svg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 49;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.callout-svg.visible {
+  opacity: 1;
+}
+
+.callout-line {
+  stroke: rgba(255, 255, 255, 0.225);
+  stroke-width: 1;
+  fill: none;
+}
+
+/* ── Fixed image box — centered in the right grid space ── */
+/*   Right space = 100vw - (content left offset + content max-width)  */
+/*   content left ≈ clamp(2rem, 32vw, 520px), content width = 580px   */
+.project-preview {
+  position: fixed;
+  /* Place left edge just after content column, then offset half the remaining space */
+  left: calc(clamp(2rem, 16vw, 240px) + 580px + (100vw - clamp(2rem, 16vw, 240px) - 580px - clamp(270px, 29.7vw, 432px)) / 2);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(270px, 29.7vw, 432px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 50;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  aspect-ratio: 4 / 3;
+}
+
+.project-preview.visible {
+  opacity: 1;
+}
+
+/* ── Project hover highlight — lifted/elevated effect ── */
+.project-list.has-hover .project-item {
+  opacity: 0.4;
+  transition: opacity 0.25s, box-shadow 0.25s, background 0.25s;
+}
+
+.project-list.has-hover .project-item.hovered {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.7),
+    0 2px 8px rgba(0, 0, 0, 0.5);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.project-preview__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.project-preview__img.active {
+  opacity: 1;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .page__content {
     margin-left: 0;
     max-width: 100%;
     padding: 6rem 1.5rem 4rem;
+  }
+
+  .project-preview {
+    display: none;
   }
 }
