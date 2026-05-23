@@ -173,6 +173,15 @@ a {
   color: var(--accent);
 }
 
+.status-spotify-link {
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.status-spotify-link:hover {
+  opacity: 0.75;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   body::after {

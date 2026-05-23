@@ -67,13 +67,18 @@ async function fetchSpotify() {
   try {
     const res  = await fetch(SPOTIFY_ENDPOINT)
     const data = await res.json()
-    if (data.isPlaying && data.title) {
-      el.textContent = `${data.title.toUpperCase()} — ${(data.artist || '').toUpperCase()}`
+
+    if (data.title) {
+      const label = data.isPlaying ? '' : 'LAST PLAYED: '
+      el.textContent = `${label}${data.title.toUpperCase()} — ${(data.artist || '').toUpperCase()}`
+      el.href = data.songUrl || '#'
     } else {
       el.textContent = 'NOT PLAYING'
+      el.href = '#'
     }
   } catch {
     el.textContent = 'NOT PLAYING'
+    el.href = '#'
   }
 }
 

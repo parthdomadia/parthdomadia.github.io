@@ -1,5 +1,6 @@
 const TOKEN_URL = 'https://accounts.spotify.com/api/token'
 const NOW_PLAYING_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
+const RECENTLY_PLAYED_URL = 'https://api.spotify.com/v1/me/player/recently-played?limit=1'
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -34,13 +35,24 @@ export default async function handler(req, res) {
       headers: { Authorization: `Bearer ${access_token}` },
     })
 
-    // 204 = nothing playing
-    if (nowPlayingRes.status === 204) {
-      return res.json({ isPlaying: false })
-    }
+    // 204 = nothing currently playing, fall back to recently played
+    if (nowPlayingRes.status === 204 || !nowPlayingRes.ok) {
+      const recentRes = await fetch(RECENTLY_PLAYED_URL, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+      const recentData = await recentRes.json()
+      const track = recentData?.items?.[0]?.track
 
-    if (!nowPlayingRes.ok) {
-      return res.json({ isPlaying: false })
+      if (!track) return res.json({ isPlaying: false })
+
+      return res.json({
+        isPlaying: false,
+        title: track.name,
+        artist: track.artists.map((a) => a.name).join(', '),
+        album: track.album.name,
+        albumArt: track.album.images[0]?.url ?? null,
+        songUrl: track.external_urls.spotify,
+      })
     }
 
     const data = await nowPlayingRes.json()

@@ -19,7 +19,7 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
 }
 
 const REDIRECT_URI = 'http://127.0.0.1:8888/callback'
-const SCOPE = 'user-read-currently-playing user-read-playback-state'
+const SCOPE = 'user-read-currently-playing user-read-playback-state user-read-recently-played'
 
 const authUrl =
   `https://accounts.spotify.com/authorize` +
