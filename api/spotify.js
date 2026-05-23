@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       const recentData = await recentRes.json()
       const track = recentData?.items?.[0]?.track
 
-      if (!track) return res.json({ isPlaying: false })
+      if (!track) return res.json({ isPlaying: false, _debug: recentData })
 
       return res.json({
         isPlaying: false,
