@@ -157,6 +157,24 @@ function initAsciiArt() {
       render()
     }, 150)
   }
+
+  // ── Reveal lens ──
+  const wrapper = pre.closest('.ascii-wrapper')
+  const reveal  = document.getElementById('ascii-reveal')
+
+  wrapper.addEventListener('mousemove', (e) => {
+    const rect = reveal.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    reveal.style.transition = 'none'
+    reveal.style.clipPath = `circle(80px at ${x}px ${y}px)`
+  })
+
+  wrapper.addEventListener('mouseleave', () => {
+    reveal.style.transition = 'clip-path 0.3s ease'
+    reveal.style.clipPath = 'circle(0px at 50% 50%)'
+  })
+
   img.onerror = () => {
     console.warn('initAsciiArt: failed to load assets/parth.jpg')
   }
