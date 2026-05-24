@@ -166,6 +166,7 @@ function initAsciiArt() {
     let rect = reveal.getBoundingClientRect()
     window.addEventListener('resize', () => { rect = reveal.getBoundingClientRect() })
     window.addEventListener('scroll', () => { rect = reveal.getBoundingClientRect() }, { passive: true })
+    wrapper.addEventListener('mouseenter', () => { rect = reveal.getBoundingClientRect() })
 
     wrapper.addEventListener('mousemove', (e) => {
       const x = e.clientX - rect.left
