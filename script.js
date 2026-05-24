@@ -177,7 +177,7 @@ function initAsciiArt() {
     })
 
     wrapper.addEventListener('mouseleave', () => {
-      reveal.style.transition = 'clip-path 0.3s ease'
+      reveal.style.transition = 'none'
       reveal.style.clipPath = 'circle(0px at 50% 50%)'
     })
   }
