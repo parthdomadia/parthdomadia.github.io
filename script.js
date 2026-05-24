@@ -169,8 +169,9 @@ function initAsciiArt() {
     wrapper.addEventListener('mouseenter', () => { rect = reveal.getBoundingClientRect() })
 
     wrapper.addEventListener('mousemove', (e) => {
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
+      const scale = 1.3
+      const x = (e.clientX - rect.left) / scale
+      const y = (e.clientY - rect.top) / scale
       reveal.style.transition = 'none'
       reveal.style.clipPath = `circle(80px at ${x}px ${y}px)`
     })
