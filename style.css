@@ -194,6 +194,14 @@ a {
   min-width: 0;
 }
 
+.ascii-wrapper {
+  position: relative;
+  display: inline-block;
+  transform: scale(1.3) translateX(23%);
+  transform-origin: center center;
+  cursor: crosshair;
+}
+
 #ascii-art {
   font-family: var(--font-mono);
   font-size: 6px;
@@ -203,8 +211,17 @@ a {
   pointer-events: none;
   user-select: none;
   letter-spacing: 0.05em;
-  transform: scale(1.3) translateX(23%);
-  transform-origin: center center;
+}
+
+#ascii-reveal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: circle(0px at 50% 50%);
+  transition: clip-path 0.3s ease;
+  pointer-events: none;
 }
 
 /* ── Responsive ── */
