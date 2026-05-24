@@ -87,8 +87,8 @@ setInterval(fetchSpotify, 30_000)
 
 // ── ASCII Art Portrait ──
 const ASCII_RAMP = ' .:,;+*?%S#@'
-const ASCII_COLS = 70
-const ASCII_ROWS = 85
+const ASCII_COLS = 95
+const ASCII_ROWS = 55
 
 function initAsciiArt() {
   const pre = document.getElementById('ascii-art')
