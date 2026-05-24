@@ -224,6 +224,12 @@ a {
 }
 
 /* ── Responsive ── */
+@media (max-width: 1100px) {
+  .hero__ascii {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   body::after {
     display: none;
