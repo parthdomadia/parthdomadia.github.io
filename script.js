@@ -168,7 +168,7 @@ function initAsciiArt() {
     if (isTouch) {
       reveal.style.clipPath = 'none'
 
-      const SPLIT_AMPLITUDE = 20
+      const SPLIT_AMPLITUDE = 50
       const SPLIT_PERIOD    = 5000
       const FEATHER         = 8
 
