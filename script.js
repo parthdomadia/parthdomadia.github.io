@@ -166,8 +166,8 @@ function initAsciiArt() {
     const isTouch = window.matchMedia('(hover: none)').matches
 
     if (isTouch) {
-      const SPLIT_AMPLITUDE = 12
-      const SPLIT_PERIOD    = 18000
+      const SPLIT_AMPLITUDE = 20
+      const SPLIT_PERIOD    = 5000
       const FEATHER         = 8
 
       function animateSplit(ts) {
