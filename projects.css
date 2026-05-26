@@ -218,15 +218,6 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1100px) {
-  .project-preview {
-    display: none;
-  }
-  .callout-svg {
-    display: none;
-  }
-}
-
 @media (max-width: 768px) {
   .page__content {
     margin-left: 0;
