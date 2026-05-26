@@ -163,22 +163,44 @@ function initAsciiArt() {
   const reveal  = document.getElementById('ascii-reveal')
 
   if (wrapper && reveal) {
-    let rect = reveal.getBoundingClientRect()
-    window.addEventListener('resize', () => { rect = reveal.getBoundingClientRect() })
-    window.addEventListener('scroll', () => { rect = reveal.getBoundingClientRect() }, { passive: true })
-    wrapper.addEventListener('mouseenter', () => { rect = reveal.getBoundingClientRect() })
+    const isTouch = window.matchMedia('(hover: none)').matches
 
-    wrapper.addEventListener('mousemove', (e) => {
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      reveal.style.transition = 'none'
-      reveal.style.clipPath = `circle(80px at ${x}px ${y}px)`
-    })
+    if (isTouch) {
+      const SPLIT_AMPLITUDE = 12
+      const SPLIT_PERIOD    = 18000
+      const FEATHER         = 8
 
-    wrapper.addEventListener('mouseleave', () => {
-      reveal.style.transition = 'none'
-      reveal.style.clipPath = 'circle(0px at 50% 50%)'
-    })
+      function animateSplit(ts) {
+        const split = 50 + SPLIT_AMPLITUDE * Math.sin((ts / SPLIT_PERIOD) * Math.PI * 2)
+        const mask  = `linear-gradient(to top,
+          black 0%,
+          black ${split - FEATHER}%,
+          transparent ${split + FEATHER}%,
+          transparent 100%)`
+        reveal.style.webkitMaskImage = mask
+        reveal.style.maskImage       = mask
+        requestAnimationFrame(animateSplit)
+      }
+
+      requestAnimationFrame(animateSplit)
+    } else {
+      let rect = reveal.getBoundingClientRect()
+      window.addEventListener('resize', () => { rect = reveal.getBoundingClientRect() })
+      window.addEventListener('scroll', () => { rect = reveal.getBoundingClientRect() }, { passive: true })
+      wrapper.addEventListener('mouseenter', () => { rect = reveal.getBoundingClientRect() })
+
+      wrapper.addEventListener('mousemove', (e) => {
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        reveal.style.transition = 'none'
+        reveal.style.clipPath = `circle(80px at ${x}px ${y}px)`
+      })
+
+      wrapper.addEventListener('mouseleave', () => {
+        reveal.style.transition = 'none'
+        reveal.style.clipPath = 'circle(0px at 50% 50%)'
+      })
+    }
   }
 
   img.onerror = () => {
