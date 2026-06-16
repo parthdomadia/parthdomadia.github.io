@@ -9,6 +9,10 @@ function initSimplifyButtons() {
     const originalName = nameEl.textContent.trim()
     const hardcodedJoke = item.dataset.joke
 
+    // Lock the description's natural height so swapping to shorter/longer
+    // text (hardcoded or LLM joke) never resizes the card.
+    desc.style.minHeight = `${desc.getBoundingClientRect().height}px`
+
     const button = document.createElement('button')
     button.type = 'button'
     button.className = 'project-item__simplify'
@@ -85,12 +89,13 @@ function playFallingText(desc, text) {
     const stage = document.createElement('div')
     stage.className = 'project-item__joke-stage'
     stage.style.width = `${rect.width}px`
+    stage.style.height = `${rect.height}px`
 
     desc.classList.add('project-item__desc--hidden')
     desc.insertAdjacentElement('beforebegin', stage)
 
     const stageWidth = rect.width
-    const stageHeight = stage.clientHeight
+    const stageHeight = rect.height
 
     const engine = Matter.Engine.create()
     const world = engine.world

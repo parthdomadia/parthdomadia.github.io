@@ -198,6 +198,10 @@
     0 0 0 1px rgba(255, 255, 255, 0.06),
     0 8px 40px rgba(0, 0, 0, 0.7),
     0 2px 8px rgba(0, 0, 0, 0.5);
+  /* padding bleeds the highlight outward; matching negative margin keeps
+     the text's own width (and therefore its line wrapping) unchanged */
+  margin-left: -1rem;
+  margin-right: -1rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -261,10 +265,11 @@
 }
 
 .project-item__joke-stage {
+  /* height is set inline by projects-joke.js to match the description's
+     locked-in height, so the card never resizes during the animation */
   position: relative;
-  height: 110px;
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.1rem;
   opacity: 1;
   transition: opacity 0.2s ease;
 }
