@@ -4,6 +4,7 @@ function initSimplifyButtons() {
   document.querySelectorAll('.project-item[data-joke]').forEach((item) => {
     const desc = item.querySelector('.project-item__desc')
     const nameEl = item.querySelector('.project-item__name')
+    const links = item.querySelector('.project-item__links')
     const originalDescription = desc.textContent.trim()
     const originalName = nameEl.textContent.trim()
     const hardcodedJoke = item.dataset.joke
@@ -12,7 +13,7 @@ function initSimplifyButtons() {
     button.type = 'button'
     button.className = 'project-item__simplify'
     button.textContent = 'Simplify'
-    desc.insertAdjacentElement('afterend', button)
+    links.appendChild(button)
 
     let revealed = false // false = showing real description, true = showing a joke
 
