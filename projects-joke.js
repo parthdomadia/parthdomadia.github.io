@@ -21,8 +21,10 @@ function initSimplifyButtons() {
 
       if (!revealed) {
         revealed = true
+        button.disabled = true
         await swapText(desc, hardcodedJoke)
         button.textContent = 'Even simpler →'
+        button.disabled = false
         return
       }
 
