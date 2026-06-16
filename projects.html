@@ -39,10 +39,42 @@
 
       <ol class="project-list">
 
-        <!-- data-image is optional — remove it if no image for this project -->
-        <li class="project-item" data-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='32' font-family='monospace'%3EProject 01%3C/text%3E%3C/svg%3E">
+        <!-- No image on this one — preview won't appear -->
+        <li class="project-item">
           <div class="project-item__top">
             <span class="project-item__num">01</span>
+            <div class="project-item__links">
+              <a href="#" class="project-item__link accent" target="_blank" rel="noopener">Live ↗</a>
+              <a href="#" class="project-item__link" target="_blank" rel="noopener">Code ↗</a>
+            </div>
+          </div>
+          <h2 class="project-item__name">Canvas</h2>
+          <p class="project-item__desc">
+            A custom canvas rendering layer (React + Konva.js + Zustand) that bypasses
+            React's render cycle during drag gestures — imperative ref-based position
+            updates with single-batch store commits on release, sustaining 60fps for
+            BFS-traversed multi-node cluster drags. A state-diffing undo/redo system
+            (zundo) reconciles snapshot deltas against a FastAPI/Supabase backend, firing
+            compensating create/update/delete calls to keep client and database state
+            consistent across every operation. Deployed as dual distributions — an
+            Electron desktop installer and a Vercel web SaaS — sharing one FastAPI
+            backend and Postgres database, with JWKS-based ES256 JWT verification and
+            Google OAuth for multi-user authentication.
+          </p>
+          <ul class="project-item__tags">
+            <li class="tag">React</li>
+            <li class="tag">Konva.js</li>
+            <li class="tag">Zustand</li>
+            <li class="tag">FastAPI</li>
+            <li class="tag">Supabase</li>
+            <li class="tag">Electron</li>
+          </ul>
+        </li>
+
+        <!-- data-image is optional — remove it if no image for this project -->
+        <li class="project-item" data-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='32' font-family='monospace'%3EProject 02%3C/text%3E%3C/svg%3E">
+          <div class="project-item__top">
+            <span class="project-item__num">02</span>
             <div class="project-item__links">
               <a href="#" class="project-item__link accent" target="_blank" rel="noopener">Live ↗</a>
               <a href="#" class="project-item__link" target="_blank" rel="noopener">Code ↗</a>
@@ -65,9 +97,9 @@
           </ul>
         </li>
 
-        <li class="project-item" data-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%232980b9'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='32' font-family='monospace'%3EProject 02%3C/text%3E%3C/svg%3E">
+        <li class="project-item" data-image="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%232980b9'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='32' font-family='monospace'%3EProject 03%3C/text%3E%3C/svg%3E">
           <div class="project-item__top">
-            <span class="project-item__num">02</span>
+            <span class="project-item__num">03</span>
             <div class="project-item__links">
               <a href="#" class="project-item__link accent" target="_blank" rel="noopener">Live ↗</a>
               <a href="#" class="project-item__link" target="_blank" rel="noopener">Code ↗</a>
@@ -85,27 +117,6 @@
             <li class="tag">Supabase</li>
             <li class="tag">PostgreSQL</li>
             <li class="tag">shadcn/ui</li>
-          </ul>
-        </li>
-
-        <!-- No image on this one — preview won't appear -->
-        <li class="project-item">
-          <div class="project-item__top">
-            <span class="project-item__num">03</span>
-            <div class="project-item__links">
-              <a href="#" class="project-item__link accent" target="_blank" rel="noopener">Live ↗</a>
-              <a href="#" class="project-item__link" target="_blank" rel="noopener">Code ↗</a>
-            </div>
-          </div>
-          <h2 class="project-item__name">Project Name</h2>
-          <p class="project-item__desc">
-            A short description of what this project does, the problem it solves,
-            and why it was interesting to build.
-          </p>
-          <ul class="project-item__tags">
-            <li class="tag">PyTorch</li>
-            <li class="tag">HuggingFace</li>
-            <li class="tag">Docker</li>
           </ul>
         </li>
 
