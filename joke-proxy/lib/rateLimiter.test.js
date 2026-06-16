@@ -36,3 +36,9 @@ test('allows requests again after the window passes', () => {
   }
   assert.equal(checkRateLimit('1.2.3.4', now + 60_001), true)
 })
+
+test('cleans up a one-off caller after its window expires', () => {
+  _resetRateLimitState()
+  assert.equal(checkRateLimit('9.9.9.9', 1000), true)
+  assert.equal(checkRateLimit('9.9.9.9', 1000 + 60_001), true)
+})
