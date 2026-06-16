@@ -1,4 +1,4 @@
-const JOKE_PROXY_URL = 'https://parth-joke-proxy.vercel.app/api/joke'
+const JOKE_PROXY_URL = 'https://joke-proxy.vercel.app/api/joke'
 
 function initSimplifyButtons() {
   document.querySelectorAll('.project-item[data-joke]').forEach((item) => {
