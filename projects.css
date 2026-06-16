@@ -229,3 +229,58 @@
     display: none;
   }
 }
+
+/* ── Simplify button ── */
+.project-item__simplify {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.project-item__simplify:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.project-item__simplify:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ── Falling-text joke transition ── */
+.project-item__desc--hidden {
+  display: none;
+}
+
+.project-item__joke-stage {
+  position: relative;
+  height: 110px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.project-item__joke-stage--fade-out {
+  opacity: 0;
+}
+
+.project-item__joke-letter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  will-change: transform;
+}
