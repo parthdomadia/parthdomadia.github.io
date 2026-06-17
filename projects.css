@@ -170,11 +170,13 @@
   position: fixed;
   /* Place left edge just after content column, then offset half the remaining space */
   left: calc(clamp(2rem, 16vw, 240px) + 580px + (100vw - clamp(2rem, 16vw, 240px) - 580px - clamp(270px, 29.7vw, 432px)) / 2);
-  /* top and height are set in JS to track the hovered item */
+  /* `top` is centered on the hovered item by JS; `height` is set by JS from the
+     image's natural aspect ratio. 4/3 is a fallback before the image loads. */
   width: clamp(270px, 29.7vw, 432px);
+  aspect-ratio: 4 / 3;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease, height 0.3s ease, top 0.3s ease;
+  transition: opacity 0.25s ease;
   z-index: 50;
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
@@ -208,7 +210,8 @@
 .project-preview__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* contain, never cover — keep the image's true aspect, don't crop it */
+  object-fit: contain;
   display: block;
   position: absolute;
   inset: 0;

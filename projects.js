@@ -6,39 +6,56 @@ const lineTop     = document.getElementById('callout-line-top')
 const lineBottom  = document.getElementById('callout-line-bottom')
 const projectList = document.querySelector('.project-list')
 
-// ── Resize + reposition preview box to match the hovered item ──
+// ── Center the preview box vertically on the hovered item ──
+//    Height comes from the image's aspect ratio (set in fitPreviewToImage),
+//    so we center the box on the item rather than matching its height.
 function positionPreview(item) {
   const itemRect = item.getBoundingClientRect()
-  preview.style.top    = `${itemRect.top}px`
-  preview.style.height = `${itemRect.height}px`
+  const boxH     = preview.getBoundingClientRect().height
+  preview.style.top = `${itemRect.top + itemRect.height / 2 - boxH / 2}px`
+}
+
+// ── Size the box to the image's natural aspect ratio (no cropping) ──
+function fitPreviewToImage(src, item) {
+  const probe = new Image()
+  probe.onload = () => {
+    const aspect = probe.naturalWidth / probe.naturalHeight
+    const width  = preview.getBoundingClientRect().width
+    preview.style.height = `${width / aspect}px`
+    if (activeItem === item) {
+      positionPreview(item)
+      drawCallout(item)
+    }
+  }
+  probe.src = src
 }
 
 // ── Callout lines: hovered item right edge → fixed box left edge ──
 function drawCallout(item) {
+  // Lines fan from the item's right-hand corners to the box's left-hand
+  // corners. The box has no position/size transition, so its rect is always
+  // accurate — including while scrolling, when the box stays put and only the
+  // item moves.
   const itemRect = item.getBoundingClientRect()
-  // The preview box's `top`/`height` are CSS-transitioned, so its rect is
-  // mid-animation when we draw. Its `left`, however, is fixed and stable.
-  // Anchor the line Y-coords to the item — which is exactly where the box is
-  // headed (positionPreview keeps box top/bottom aligned to the item) — so the
-  // lines stay attached instead of pointing at the box's pre-transition spot.
-  const previewLeft = preview.getBoundingClientRect().left
+  const boxRect  = preview.getBoundingClientRect()
 
   lineTop.setAttribute('x1', itemRect.right)
   lineTop.setAttribute('y1', itemRect.top)
-  lineTop.setAttribute('x2', previewLeft)
-  lineTop.setAttribute('y2', itemRect.top)
+  lineTop.setAttribute('x2', boxRect.left)
+  lineTop.setAttribute('y2', boxRect.top)
 
   lineBottom.setAttribute('x1', itemRect.right)
   lineBottom.setAttribute('y1', itemRect.bottom)
-  lineBottom.setAttribute('x2', previewLeft)
-  lineBottom.setAttribute('y2', itemRect.bottom)
+  lineBottom.setAttribute('x2', boxRect.left)
+  lineBottom.setAttribute('y2', boxRect.bottom)
 }
 
-// ── Redraw on scroll (item moves, box stays fixed) ──
+// ── Redraw on scroll: the box stays fixed in place, only the lines re-track
+//    the scrolling item. (No positionPreview here — that's what made the box
+//    drift with the scroll.) ──
 let activeItem = null
 window.addEventListener('scroll', () => {
   if (activeItem) {
-    positionPreview(activeItem)
     drawCallout(activeItem)
   }
 }, { passive: true })
@@ -70,8 +87,11 @@ document.querySelectorAll('.project-item').forEach((item) => {
       }
 
       activeItem = item
-      positionPreview(item)
       preview.classList.add('visible')
+      // Size to the image's aspect ratio, then center + draw. fitPreviewToImage
+      // re-centers and redraws once the image's dimensions are known.
+      fitPreviewToImage(src, item)
+      positionPreview(item)
 
       requestAnimationFrame(() => {
         drawCallout(item)
