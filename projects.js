@@ -6,6 +6,13 @@ const lineTop     = document.getElementById('callout-line-top')
 const lineBottom  = document.getElementById('callout-line-bottom')
 const projectList = document.querySelector('.project-list')
 
+// ── Resize + reposition preview box to match the hovered item ──
+function positionPreview(item) {
+  const itemRect = item.getBoundingClientRect()
+  preview.style.top    = `${itemRect.top}px`
+  preview.style.height = `${itemRect.height}px`
+}
+
 // ── Callout lines: hovered item right edge → fixed box left edge ──
 function drawCallout(item) {
   const itemRect    = item.getBoundingClientRect()
@@ -25,8 +32,19 @@ function drawCallout(item) {
 // ── Redraw on scroll (item moves, box stays fixed) ──
 let activeItem = null
 window.addEventListener('scroll', () => {
-  if (activeItem) drawCallout(activeItem)
+  if (activeItem) {
+    positionPreview(activeItem)
+    drawCallout(activeItem)
+  }
 }, { passive: true })
+
+// ── Re-fit preview when joke-text swap changes a card's height ──
+window.addEventListener('project-item-resized', (e) => {
+  if (activeItem && activeItem === e.detail.item) {
+    positionPreview(activeItem)
+    drawCallout(activeItem)
+  }
+})
 
 // ── Hover interactions ──
 document.querySelectorAll('.project-item').forEach((item) => {
@@ -47,6 +65,7 @@ document.querySelectorAll('.project-item').forEach((item) => {
       }
 
       activeItem = item
+      positionPreview(item)
       preview.classList.add('visible')
 
       requestAnimationFrame(() => {

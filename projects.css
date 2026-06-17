@@ -170,15 +170,14 @@
   position: fixed;
   /* Place left edge just after content column, then offset half the remaining space */
   left: calc(clamp(2rem, 16vw, 240px) + 580px + (100vw - clamp(2rem, 16vw, 240px) - 580px - clamp(270px, 29.7vw, 432px)) / 2);
-  top: 50%;
-  transform: translateY(-50%);
+  /* top and height are set in JS to track the hovered item */
   width: clamp(270px, 29.7vw, 432px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, height 0.3s ease, top 0.3s ease;
   z-index: 50;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  aspect-ratio: 4 / 3;
+  overflow: hidden;
 }
 
 .project-preview.visible {
@@ -208,7 +207,7 @@
 
 .project-preview__img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   display: block;
   position: absolute;

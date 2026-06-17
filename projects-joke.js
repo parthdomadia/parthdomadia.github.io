@@ -27,7 +27,7 @@ function initSimplifyButtons() {
       if (!revealed) {
         revealed = true
         button.disabled = true
-        await swapText(desc, hardcodedJoke)
+        await swapText(desc, hardcodedJoke, item)
         button.textContent = 'Even simpler →'
         button.disabled = false
         return
@@ -39,7 +39,7 @@ function initSimplifyButtons() {
 
       try {
         const joke = await fetchJoke(originalName, originalDescription)
-        await swapText(desc, joke)
+        await swapText(desc, joke, item)
         button.textContent = restoreLabel
       } catch {
         button.textContent = 'try again later'
@@ -76,10 +76,11 @@ async function fetchJoke(name, description) {
 const TUMBLE_DURATION_MS = 1000
 const FADE_DURATION_MS = 200
 
-async function swapText(desc, newText) {
+async function swapText(desc, newText, item) {
   await playFallingText(desc, newText)
   desc.textContent = newText
   desc.classList.remove('project-item__desc--hidden')
+  window.dispatchEvent(new CustomEvent('project-item-resized', { detail: { item } }))
 }
 
 function playFallingText(desc, text) {

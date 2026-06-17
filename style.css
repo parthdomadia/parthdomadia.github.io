@@ -46,8 +46,8 @@ body::after {
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
-  -webkit-mask-image: linear-gradient(to bottom right, transparent 10%, rgba(0,0,0,0.4) 45%, black 80%);
-  mask-image: linear-gradient(to bottom right, transparent 10%, rgba(0,0,0,0.4) 45%, black 80%);
+  -webkit-mask-image: linear-gradient(to bottom right, transparent 30%, rgba(0,0,0,0.25) 55%, black 80%);
+  mask-image: linear-gradient(to bottom right, transparent 30%, rgba(0,0,0,0.25) 55%, black 80%);
   pointer-events: none;
   z-index: 0;
 }
