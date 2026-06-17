@@ -15,18 +15,23 @@ function positionPreview(item) {
 
 // ── Callout lines: hovered item right edge → fixed box left edge ──
 function drawCallout(item) {
-  const itemRect    = item.getBoundingClientRect()
-  const previewRect = preview.getBoundingClientRect()
+  const itemRect = item.getBoundingClientRect()
+  // The preview box's `top`/`height` are CSS-transitioned, so its rect is
+  // mid-animation when we draw. Its `left`, however, is fixed and stable.
+  // Anchor the line Y-coords to the item — which is exactly where the box is
+  // headed (positionPreview keeps box top/bottom aligned to the item) — so the
+  // lines stay attached instead of pointing at the box's pre-transition spot.
+  const previewLeft = preview.getBoundingClientRect().left
 
   lineTop.setAttribute('x1', itemRect.right)
   lineTop.setAttribute('y1', itemRect.top)
-  lineTop.setAttribute('x2', previewRect.left)
-  lineTop.setAttribute('y2', previewRect.top)
+  lineTop.setAttribute('x2', previewLeft)
+  lineTop.setAttribute('y2', itemRect.top)
 
   lineBottom.setAttribute('x1', itemRect.right)
   lineBottom.setAttribute('y1', itemRect.bottom)
-  lineBottom.setAttribute('x2', previewRect.left)
-  lineBottom.setAttribute('y2', previewRect.bottom)
+  lineBottom.setAttribute('x2', previewLeft)
+  lineBottom.setAttribute('y2', itemRect.bottom)
 }
 
 // ── Redraw on scroll (item moves, box stays fixed) ──
